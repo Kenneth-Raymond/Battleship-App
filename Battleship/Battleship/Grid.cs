@@ -28,7 +28,7 @@ namespace Battleship
             ClearGrid();
     }
         /* Equation to determine individual squares
-           // Math.Floor((495 - 329) / 20);
+           // Math.Floor((665 - 156) / 20);
             //Take the start point of the grid(left/top (the x/y) ) and 
             //subtract the x/y point from the coorisponding side.
             //Then divide that from the dimensions of the grid(size of the square)

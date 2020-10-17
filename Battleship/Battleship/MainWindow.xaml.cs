@@ -206,20 +206,21 @@ namespace Battleship
             //the current window.
             Point point = Mouse.GetPosition(Application.Current.MainWindow);
             //Apply the algorith covered in grid to the stored points
-            gameBoard.SelectSquare(point, gameBoard.playerTwo.playerGrid);
-            Fire_Missile.IsEnabled = true;
-
-            Rectangle selection = new Rectangle();
-            selection.Name = "selection";
-            var sele = (UIElement)LogicalTreeHelper.FindLogicalNode(Enemy_Canvas, "selection");
-            Enemy_Canvas.Children.Remove(sele);
-            selection.Width = 40;
-            selection.Height = 40;
-            selection.Fill = new SolidColorBrush(Colors.Violet);
-            selection.Opacity = .7;
-            Enemy_Canvas.Children.Add(selection);
-            Canvas.SetTop(selection, (gameBoard.fireLocation.Y * 40));
-            Canvas.SetLeft(selection, (gameBoard.fireLocation.X * 40));
+            if (gameBoard.SelectSquare(point, gameBoard.playerTwo.playerGrid))
+            {
+                Fire_Missile.IsEnabled = true;
+                Rectangle selection = new Rectangle();
+                selection.Name = "selection";
+                var sele = (UIElement)LogicalTreeHelper.FindLogicalNode(Enemy_Canvas, "selection");
+                Enemy_Canvas.Children.Remove(sele);
+                selection.Width = 40;
+                selection.Height = 40;
+                selection.Fill = new SolidColorBrush(Colors.Violet);
+                selection.Opacity = .7;
+                Enemy_Canvas.Children.Add(selection);
+                Canvas.SetTop(selection, (gameBoard.fireLocation.Y * 40));
+                Canvas.SetLeft(selection, (gameBoard.fireLocation.X * 40));
+            }
         }
 
         private void Retreat_Click(object sender, RoutedEventArgs e)

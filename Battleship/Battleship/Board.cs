@@ -32,19 +32,31 @@ namespace Battleship
             playerTwo = new Player(true, false);
         }
         
-        public void SelectSquare(System.Windows.Point selectedSquare, Grid grid)
+        public bool SelectSquare(System.Windows.Point selectedSquare, Grid grid)
         {
+
             fireLocation.X = Math.Floor(Math.Abs(selectedSquare.X - grid.gridWidthStart) / 40);
             fireLocation.Y = Math.Floor(Math.Abs(selectedSquare.Y - grid.gridHeightStart) / 40);
-
+            //Correcting borders to the max array size
             if (fireLocation.X > 9)
             {
                 fireLocation.X = 9;
             }
-            if(fireLocation.Y > 9)
+            if (fireLocation.Y > 9)
             {
                 fireLocation.Y = 9;
             }
+
+            if (grid.gridLocation[Convert.ToInt32(fireLocation.X), Convert.ToInt32(fireLocation.Y)] == 0
+                || grid.gridLocation[Convert.ToInt32(fireLocation.X), Convert.ToInt32(fireLocation.Y)] == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+           
         }
 
         public void PlaceShips(Grid grid)
